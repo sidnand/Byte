@@ -16,8 +16,6 @@ struct USER_FILE {
 };
 
 // Function prototypes
-const char *read_file(char *filepath);
-const char *get_extension(const char *filename);
 struct USER_FILE get_file(char *filepath);
 
 
