@@ -21,5 +21,5 @@ struct TOKEN {
 };
 
 struct TOKEN create_token(const char *value, enum TOKEN_TYPE type);
-struct TOKEN *tokenize(char **arr);
+struct TOKEN *tokenize(char **arr, int num_elements);
 char **split(char *content, int *num_elements);

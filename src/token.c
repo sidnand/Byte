@@ -17,11 +17,8 @@ struct TOKEN create_token(const char *value, enum TOKEN_TYPE type) {
 // create a function that takes an array of strings and returns an array of tokens
 // @param arr: the array of strings
 // @return: an array of tokens
-struct TOKEN *tokenize(char **arr) {
-    size_t num_elements = sizeof(arr) / sizeof(arr[0]);
-    printf("Num elements: %zu\n", num_elements);
-
-    struct TOKEN *tokens = malloc(num_elements * sizeof(struct TOKEN));
+struct TOKEN *tokenize(char **arr, int num_elements) {
+    struct TOKEN *tokens = malloc((size_t) num_elements * sizeof(struct TOKEN));
 
     if (tokens == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
@@ -37,22 +34,15 @@ struct TOKEN *tokenize(char **arr) {
 
         enum TOKEN_TYPE type;
 
-        printf("Token: %s\n", token);
-
         if (is_int(token)) {
             type = INT;
-            printf("INT\n");
         } else if (is_float(token)) {
             type = FLOAT;
-            printf("FLOAT\n");
         } else {
             type = IDENTIFIER;
-            printf("IDENTIFIER\n");
         }
 
         tokens[i] = create_token(&token[0], type);
-        printf("Type: %d\n", tokens[i].type);
-        printf("Value: %s\n", tokens[i].value);
     }
 
     return tokens;
