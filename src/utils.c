@@ -11,7 +11,7 @@ void* resize_array(void* array, size_t current_size, size_t new_size, size_t ele
 
     if (new_array == NULL) {
         fprintf(stderr, "Memory reallocation failed\n");
-        return array;
+        exit(EXIT_FAILURE);
     }
 
     return new_array;

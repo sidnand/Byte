@@ -6,6 +6,9 @@
 #include <string.h> // string manipulation
 #include <libgen.h> // pattern matching
 #include <stdlib.h> // memory allocation
+#include <ctype.h> // character classification
+
+const int MAX_TOKENS = 10;
 
 // Enumeration representing token types
 enum TOKEN_TYPE {
@@ -35,6 +38,6 @@ const char *read_file(char *filepath);
 const char *get_extension(const char *filename);
 struct USER_FILE get_file(char *filepath);
 struct TOKEN create_token(const char *value, enum TOKEN_TYPE type);
-// struct TOKEN *tokenize(char *content);
+char **split(char *content);
 
 #endif // MAIN_H

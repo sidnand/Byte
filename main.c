@@ -1,5 +1,7 @@
 #include "./include/main.h"
 
+#include "./src/utils.c"
+
 int main(int argc, char *argv[]) {
 
     bool isValidArguments = (argc == 2);
@@ -11,12 +13,14 @@ int main(int argc, char *argv[]) {
 
     char *filepath = argv[1];
     struct USER_FILE file = get_file(filepath);
+    
+    char **split_arr = split(file.content);
+    for (int i = 0; split_arr[i] != NULL; i++) {
+        printf("%s\n", split_arr[i]);
+    }
 
-    printf("Path: %s\n", file.path);
-    printf("Name: %s\n", file.name);
-    printf("Extension: %s\n", file.ext);
-    printf("Content: %s\n", file.content);
 
+    // FREE MEMORY
     free(file.path);
     free(file.name);
     free(file.ext);
@@ -66,8 +70,8 @@ const char *read_file(char *filepath) {
     FILE *file = fopen(filepath, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
-        return NULL;
+        fprintf(stderr, "Error opening file\n");
+        exit(EXIT_FAILURE);
     }
 
     fseek(file, 0, SEEK_END);
@@ -77,18 +81,18 @@ const char *read_file(char *filepath) {
     char *content = malloc(file_size + 1);
 
     if (content == NULL) {
-        perror("Error allocating memory");
         fclose(file);
-        return NULL;
+        fprintf(stderr, "Error allocating memory\n");
+        exit(EXIT_FAILURE);
     }
 
     size_t bytes_read = fread(content, 1, file_size, file);
     content[bytes_read] = '\0'; // null terminate
 
     if (bytes_read != (size_t) file_size) {
-        perror("Error reading file");
         fclose(file);
-        return NULL;
+        fprintf(stderr, "Error reading file\n");
+        exit(EXIT_FAILURE);
     }
 
     return content;
@@ -99,4 +103,31 @@ struct TOKEN create_token(const char *value, enum TOKEN_TYPE type) {
     token.value = strdup(value);
     token.type = type;
     return token;
+}
+
+// create a function that takes a string and returns an array of tokens
+// @param content: the content of the file
+// @return: an array of tokens
+char **split(char *content) {
+    char *split_by = " \t\n\r(){}";
+    char **tokens = malloc(MAX_TOKENS);
+
+    if (tokens == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    char *token = strtok(content, split_by);
+
+    int i = 0;
+    while (token != NULL) {
+        if (i % MAX_TOKENS == 0) {
+            tokens = resize_array(tokens, i, i + MAX_TOKENS, sizeof(char *));
+        }
+
+        tokens[i++] = token;
+        token = strtok(NULL, split_by);
+    }
+
+    return tokens;
 }
