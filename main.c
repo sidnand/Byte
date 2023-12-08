@@ -16,8 +16,10 @@ int main(int argc, char *argv[]) {
     struct USER_FILE file = get_file(filepath);
     
     char **split_arr = split(file.content);
-    for (int i = 0; split_arr[i] != NULL; i++) {
-        printf("%s\n", split_arr[i]);
+    struct TOKEN *tokens = tokenize(split_arr);
+
+    for (int i = 0; i < MAX_TOKENS; i++) {
+        printf("%d: %s\n", tokens[i].type, tokens[i].value);
     }
 
 
