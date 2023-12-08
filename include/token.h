@@ -2,11 +2,15 @@ const int MAX_TOKENS = 10;
 
 // Enumeration representing token types
 enum TOKEN_TYPE {
-    KEYWORD,     // reserved words with special meaning. e.g., if, else, while, for, true, false
-    IDENTIFIER,  // names given to variables, functions, etc.
-    OPERATOR,    // symbols that operate on arguments and produce results. e.g., +, -, *, /, %
-    SEPARATOR,   // symbols that separate statements. e.g., ;, {, }, (, ), [, ]
-    LITERAL,     // a fixed value. e.g., integer, float, string
+    IF, ELSE_IF, ELSE, WHILE, RETURN,
+    INT, FLOAT, STR, CHAR, INT_ARR, FLOAT_ARR, STR_ARR, CHAR_ARR,
+    PLUS, MINUS, MULTIPLY, DIVIDE, MODULO,
+    EQUAL, NOT_EQUAL, GREATER_THAN, LESS_THAN, GREATER_THAN_EQUAL, LESS_THAN_EQUAL,
+    AND, OR, NOT,
+    ASSIGNMENT,
+    OPEN_PAREN, CLOSE_PAREN, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET,
+    COMMA, SEMICOLON,
+    LINE_TERMINATOR,
 };
 
 // Structure representing a token
