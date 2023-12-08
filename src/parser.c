@@ -1,5 +1,6 @@
 #include "../include/parser.h"
 #include <stdbool.h>
+#include <ctype.h>
 
 // checks if a string is a float
 // @param str: the string to check
@@ -22,8 +23,13 @@ bool is_float(char *str) {
 // @return: true if the string is an integer, false otherwise
 bool is_int(char *str) {
     int len = strlen(str);
+    int start_index = 0;
 
-    for (int i = 0; i < len; i++) {
+    if (str[0] == '-' || str[0] == '+') {
+        start_index = 1;
+    }
+
+    for (int i = start_index; i < len; i++) {
         if (!isdigit(str[i])) {
             return false;
         }
