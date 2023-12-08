@@ -43,7 +43,7 @@ const char *read_file(char *filepath) {
     }
 
     fseek(file, 0, SEEK_END);
-    long file_size = ftell(file);
+    size_t file_size = ftell(file);
     rewind(file);
 
     char *content = malloc(file_size + 1);
@@ -57,7 +57,7 @@ const char *read_file(char *filepath) {
     size_t bytes_read = fread(content, 1, file_size, file);
     content[bytes_read] = '\0'; // null terminate
 
-    if (bytes_read != (size_t) file_size) {
+    if (bytes_read != file_size) {
         fclose(file);
         fprintf(stderr, "Error reading file\n");
         exit(EXIT_FAILURE);
