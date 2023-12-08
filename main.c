@@ -15,15 +15,20 @@ int main(int argc, char *argv[]) {
     char *filepath = argv[1];
     struct USER_FILE file = get_file(filepath);
     
-    char **split_arr = split(file.content);
-    struct TOKEN *tokens = tokenize(split_arr);
+    int num_elements_split_arr;
+    char **split_arr = split(file.content, &num_elements_split_arr);
 
-    for (int i = 0; i < MAX_TOKENS; i++) {
-        printf("%d: %s\n", tokens[i].type, tokens[i].value);
+    struct TOKEN *tokens = tokenize(split_arr, num_elements_split_arr);
+
+    for (size_t i = 0; i < num_elements_split_arr; i++) {
+        struct TOKEN token = tokens[i];
+
+        printf("Type: %d\n", token.type);
+        printf("Token: %s\n", token.value);
     }
 
-
     // FREE MEMORY
+
     free(file.path);
     free(file.name);
     free(file.ext);
