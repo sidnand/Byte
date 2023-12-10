@@ -1,2 +1,2 @@
-bool is_float(char *str);
-bool is_int(char *str);
+bool is_number(char *str);
+enum TOKEN_TYPE get_token_type(char *token);

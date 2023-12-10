@@ -1,7 +1,7 @@
 #include "./include/main.h"
 
 #include "./src/utils.c"
-#include "./src/token.c"
+#include "./src/tokenizer.c"
 
 int main(int argc, char *argv[]) {
 
