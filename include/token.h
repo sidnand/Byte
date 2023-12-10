@@ -10,10 +10,13 @@ enum TOKEN_TYPE {
     INT, FLOAT,
     
     // Special characters
-    SEMI_COLON,
+    SEMI_COLON, PERIOD, COMMA, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, LEFT_BRACKET, RIGHT_BRACKET,
 
     // User-defined identifiers
     IDENTIFIER,
+
+    // MISC
+    IGNORE,
 };
 
 // Structure representing a token

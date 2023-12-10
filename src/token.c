@@ -53,27 +53,58 @@ struct TOKEN *tokenize(char **arr, int num_elements) {
 // @param num_elements: the number of elements in the array
 // @return: an array of tokens
 char **split(char *content, int *num_elements) {
-    char *split_by = " \t\n\r(){}[]";
-    char **tokens = malloc((INITIAL_SIZE + 1) * sizeof(char *));  // +1 for null terminator
+    char *split_by = " \t\n\r";
+    char **tokens = malloc((strlen(content) + 1) * sizeof(char *));  // +1 for null terminator
 
     if (tokens == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
 
-    char *token = strtok(content, split_by);
-
     int i = 0;
-    while (token != NULL) {
-        if (i == max_tokens - 1) {
-            max_tokens *= 2; // time complexity: O(n)
-            tokens = resize_array(tokens, i, max_tokens, sizeof(char *));
+    while (content[i] != '\0') {
+        tokens[i] = malloc(2 * sizeof(char)); // 2 bytes, one for the character and one for the null terminator
+
+        if (tokens[i] == NULL) {
+            fprintf(stderr, "Memory allocation failed\n");
+            exit(EXIT_FAILURE);
         }
 
-        tokens[i++] = token;
-        token = strtok(NULL, split_by);
+        tokens[i][0] = content[i];
+        tokens[i][1] = '\0';
+        i++;
     }
 
     *num_elements = i;
+    tokens[i] = NULL; // null terminator
+
     return tokens;
 }
+
+
+
+// char **split_old(char *content, int *num_elements) {
+//     char *split_by = " \t\n\r";
+//     char **tokens = malloc((INITIAL_SIZE + 1) * sizeof(char *));  // +1 for null terminator
+
+//     if (tokens == NULL) {
+//         fprintf(stderr, "Memory allocation failed\n");
+//         exit(EXIT_FAILURE);
+//     }
+
+//     char *token = strtok(content, split_by);
+
+//     int i = 0;
+//     while (token != NULL) {
+//         if (i == max_tokens - 1) {
+//             max_tokens *= 2; // time complexity: O(n)
+//             tokens = resize_array(tokens, i, max_tokens, sizeof(char *));
+//         }
+
+//         tokens[i++] = token;
+//         token = strtok(NULL, split_by);
+//     }
+
+//     *num_elements = i;
+//     return tokens;
+// }
