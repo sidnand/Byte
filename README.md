@@ -11,6 +11,10 @@ Byte is a small interpreted programming lanuage written in C. It is similar to C
 // This is a comment
 /* This is multiline comment */
 
+============================== IMPORTS ==============================
+
+import "./path/to/file.by"
+
 ============================== DATA TYPES / VARIABLES ==============================
 
 str name = "John Doe";
