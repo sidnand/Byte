@@ -18,6 +18,10 @@ int main(int argc, char *argv[]) {
     int num_elements_split_arr;
     char **split_arr = split(file.content, &num_elements_split_arr);
 
+    // for (size_t i = 0; i < num_elements_split_arr; i++) {
+    //     printf("%s\n", split_arr[i]);
+    // }
+
     struct TOKEN *tokens = tokenize(split_arr, num_elements_split_arr);
 
     for (size_t i = 0; i < num_elements_split_arr; i++) {

@@ -32,15 +32,7 @@ struct TOKEN *tokenize(char **arr, int num_elements) {
             break;
         }
 
-        enum TOKEN_TYPE type;
-
-        if (is_int(token)) {
-            type = INT;
-        } else if (is_float(token)) {
-            type = FLOAT;
-        } else {
-            type = IDENTIFIER;
-        }
+        enum TOKEN_TYPE type = get_token_type(token);
 
         tokens[i] = create_token(&token[0], type);
     }
@@ -80,31 +72,3 @@ char **split(char *content, int *num_elements) {
 
     return tokens;
 }
-
-
-
-// char **split_old(char *content, int *num_elements) {
-//     char *split_by = " \t\n\r";
-//     char **tokens = malloc((INITIAL_SIZE + 1) * sizeof(char *));  // +1 for null terminator
-
-//     if (tokens == NULL) {
-//         fprintf(stderr, "Memory allocation failed\n");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     char *token = strtok(content, split_by);
-
-//     int i = 0;
-//     while (token != NULL) {
-//         if (i == max_tokens - 1) {
-//             max_tokens *= 2; // time complexity: O(n)
-//             tokens = resize_array(tokens, i, max_tokens, sizeof(char *));
-//         }
-
-//         tokens[i++] = token;
-//         token = strtok(NULL, split_by);
-//     }
-
-//     *num_elements = i;
-//     return tokens;
-// }

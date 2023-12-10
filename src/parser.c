@@ -35,3 +35,51 @@ bool is_int(char *str) {
 
     return true;
 }
+
+enum TOKEN_TYPE get_token_type(char *token) {
+    switch (*token) {
+        case '+':
+            return PLUS;
+        case '-':
+            return MINUS;
+        case '*':
+            return MULTIPLY;
+        case '/':
+            return DIVIDE;
+        case '%':
+            return MODULO;
+        case '^':
+            return POWER;
+        case '(':
+            return LPAREN;
+        case ')':
+            return RPAREN;
+        case '{':
+            return LBRACE;
+        case '}':
+            return RBRACE;
+        case '[':
+            return LBRACKET;
+        case ']':
+            return RBRACKET;
+        case ';':
+            return SEMICOLON;
+        case ',':
+            return COMMA;
+        case '.':
+            return DOT;
+        case ' ':
+        case '\t':
+        case '\n':
+        case '\r':
+            return WHITESPACE;
+        default:
+            if (is_int(token)) {
+                return INT;
+            } else if (is_float(token)) {
+                return FLOAT;
+            } else {
+                return IDENTIFIER;
+            }
+    }
+}
