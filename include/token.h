@@ -3,15 +3,14 @@ int max_tokens = INITIAL_SIZE;
 
 // Enumeration representing token types
 enum TOKEN_TYPE {
-    IF, ELSE, WHILE, RETURN,
-    INT, FLOAT, STR, CHAR, INT_ARR, FLOAT_ARR, STR_ARR, CHAR_ARR,
-    PLUS, MINUS, MULTIPLY, DIVIDE, MODULO,
-    EQUAL, NOT_EQUAL, GREATER_THAN, LESS_THAN, GREATER_THAN_EQUAL, LESS_THAN_EQUAL,
-    AND, OR, NOT,
-    ASSIGNMENT,
-    OPEN_PAREN, CLOSE_PAREN, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET,
-    COMMA, SEMICOLON,
-    IDENTIFIER,
+    // Arithmetic operators
+    PLUS, MINUS, MULTIPLY, DIVIDE, MODULO, POWER,
+
+    // Data types
+    INT, FLOAT,
+    
+    // Special characters
+    SEMI_COLON,
 };
 
 // Structure representing a token
