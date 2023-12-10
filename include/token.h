@@ -11,6 +11,9 @@ enum TOKEN_TYPE {
     
     // Special characters
     SEMI_COLON,
+
+    // User-defined identifiers
+    IDENTIFIER,
 };
 
 // Structure representing a token

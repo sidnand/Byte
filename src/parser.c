@@ -1,6 +1,4 @@
 #include "../include/parser.h"
-#include <stdbool.h>
-#include <ctype.h>
 
 // checks if a string is a float
 // @param str: the string to check
