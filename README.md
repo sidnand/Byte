@@ -4,7 +4,7 @@ Byte is a small interpreted programming lanuage written in C. It is similar to C
 
 ## Syntax Ideas
 
-``` c
+```
 
 ============================== COMMENTS ==============================
 
@@ -65,15 +65,19 @@ Person[] people = [
 * : multiply
 / : divide
 % : modulo
-**n : power of n
+^n : power of n
+++ : increment
+-- : decrement
++= : add and assign
+-= : subtract and assign
 
 // Comparison
 == != > < >= <=
 
 // Logical
-& : and
-| : or
-! : not
+and
+or
+not
 
 ============================== CONTROL FLOW ==============================
 
@@ -97,16 +101,18 @@ for i = 0, i < 10, i++ {
 
 ============================== FUNCTIONS ==============================
 
-name() = {
+str name() = {
     ...
 };
 
-name(arg1, arg2) = {
+float name(int arg1, char arg2) = {
     ...
 };
 
-name() = return null;
+Person name() = return john;
 
-name(arg1, arg2) = return arg1;
+void name() = {
+    ...
+};
 
 ```
