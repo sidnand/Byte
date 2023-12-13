@@ -1,23 +1,26 @@
-#include "../include/utils.h"
+#include "./../../include/io/reader.h"
 
-// dynamically resize an array of any type
-// @param array: the array to resize
-// @param current_size: the current size of the array
-// @param new_size: the new size of the array
-// @param element_size: the size of each element in the array
-// @return: the resized array
-void* resize_array(void* array, size_t current_size, size_t new_size, size_t element_size) {
-    void* new_array = realloc(array, new_size * element_size);
+// returns a USER_FILE struct
+// @param filepath: the path to the file
+// @return: a USER_FILE struct
+struct USER_FILE get_file(char *filepath) {
+    struct USER_FILE file;
 
-    if (new_array == NULL) {
-        fprintf(stderr, "Memory reallocation failed\n");
-        exit(EXIT_FAILURE);
-    }
+    const char *absolute_path = realpath(filepath, NULL);
+    const char *filename = basename(filepath);
+    const char *extension = get_extension(filename);
+    const char *content = read_file(filepath);
 
-    return new_array;
+    // allocate memory and copy strings
+    file.path = strdup(absolute_path);
+    file.name = strdup(filename);
+    file.ext = strdup(extension);
+    file.content = strdup(content);
+
+    return file;
 }
 
-// returns the extension of a file
+// get the extension of a file
 // @param filename: the name of the file
 // @return: the extension of the file
 const char *get_extension(const char *filename) {
@@ -25,13 +28,13 @@ const char *get_extension(const char *filename) {
     if (extension != NULL) {
         extension++; // Move past the '.'
     } else {
-        extension = "No extension";
+        extension = "";
     }
 
     return extension;
 }
 
-// reads a file and returns
+// get contents of a file
 // @param filepath: the path to the file
 // @return: the content of the file
 const char *read_file(char *filepath) {

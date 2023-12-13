@@ -2,6 +2,16 @@
 
 Byte is a small interpreted programming lanuage written in C. It is similar to C in terms of features, but does memory management for you and the syntax is cleaner.
 
+## Development
+
+### Testing
+
+- To run the tests: `make test TEST_FILE=<path/to/file.test.c>`
+
+### Building
+
+- To build the project, run the following command: `make build`
+
 ## File Structure (Expected)
 
 ```

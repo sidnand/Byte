@@ -1,18 +1,10 @@
-#include "./includes.h"
-
 #ifndef MAIN_H
 #define MAIN_H
 
-// Structure representing a user file
-struct USER_FILE {
-    char *path;
-    char *name;
-    char *ext;
-    char *content;
-};
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include <ctype.h>
 
-// Function prototypes
-struct USER_FILE get_file(char *filepath);
-
-
-#endif // MAIN_H
+#endif
