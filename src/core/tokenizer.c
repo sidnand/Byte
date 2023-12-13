@@ -1,18 +1,6 @@
-#include "../include/tokenizer.h"
+#include "./../../include/core/tokenizer.h"
 
-#include "./parser.c"
-
-// create a function that takes a string and returns a token
-// @param value: the value of the token
-// @param type: the type of the token
-// @return: a token
-struct TOKEN create_token(const char *value, enum TOKEN_TYPE type) {
-    struct TOKEN token;
-    token.value = strdup(value);
-    token.type = type;
-
-    return token;
-}
+#include "./../data/token.c"
 
 // create a function that takes an array of strings and returns an array of tokens
 // @param arr: the array of strings

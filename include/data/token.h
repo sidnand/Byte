@@ -1,5 +1,5 @@
-const int INITIAL_SIZE = 5000;
-int max_tokens = INITIAL_SIZE;
+#ifndef TOKEN_H
+#define TOKEN_H
 
 // Enumeration representing token types
 enum TOKEN_TYPE {
@@ -26,5 +26,7 @@ struct TOKEN {
 };
 
 struct TOKEN create_token(const char *value, enum TOKEN_TYPE type);
-struct TOKEN *tokenize(char **arr, int num_elements);
-char **split(char *content, int *num_elements);
+enum TOKEN_TYPE get_token_type(char *token);
+bool is_number(char *str);
+
+#endif

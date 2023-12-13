@@ -1,16 +1,27 @@
-#include "../include/parser.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
 
-// checks if a string is a number
-// @param str: the string to check
-// @return: true if the string is a number, false otherwise
-bool is_number(char *str) {
-    if (!isdigit(*str)) {
-        return false;
-    }
+#include "../../include/data/token.h"
 
-    return true;
+// create a function that takes a string and returns a token
+// @param value: the value of the token
+// @param type: the type of the token
+// @return: a token
+struct TOKEN create_token(const char *value, enum TOKEN_TYPE type) {
+    struct TOKEN token;
+    token.value = strdup(value);
+
+    token.type = type;
+
+    return token;
 }
 
+// get the type of a token
+// @param token: the token to check
+// @return: the type of the token
 enum TOKEN_TYPE get_token_type(char *token) {
     switch (*token) {
         // operators
@@ -64,4 +75,15 @@ enum TOKEN_TYPE get_token_type(char *token) {
                 return IDENTIFIER;
             }
     }
+}
+
+// checks if a string is a number
+// @param str: the string to check
+// @return: true if the string is a number, false otherwise
+bool is_number(char *str) {
+    if (!isdigit(*str)) {
+        return false;
+    }
+
+    return true;
 }
