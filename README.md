@@ -2,6 +2,37 @@
 
 Byte is a small interpreted programming lanuage written in C. It is similar to C in terms of features, but does memory management for you and the syntax is cleaner.
 
+## File Structure (Expected)
+
+```
+- root
+    |-- bins                             # Directory for executables
+    |-- include                          # Header files
+    |-- libs                             # Libraries
+        |-- unity                          # Unit testing library
+    |-- examples                         # Example programs
+
+    |-- tests                            # Unit tests
+
+    |-- src                              # Source code
+        |-- core                           # Core files
+            |-- lexer.c                     # Lexical analyzer
+            |-- parser.c                    # Parser
+            |-- interpreter.c               # Interpreter
+        |-- data                           # Data structures
+            |-- token.c                     # Token data structure for lexer
+        |-- io                             # Input/Output
+            |-- reader.c                    # File reader
+        |-- utils                          # Utility functions
+
+    |-- main.c                           # Main file
+
+    |-- .gitignore                       # Gitignore file for specifying ignored files/directories
+    |-- README.md                        # Project README file
+    |-- Makefile                         # Makefile for building the project
+
+```
+
 ## Syntax Ideas
 
 ```
