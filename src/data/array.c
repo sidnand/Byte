@@ -1,5 +1,3 @@
-#include <stddef.h>
-
 #include "./../../include/data/array.h"
 
 // dynamically resize an array of any type

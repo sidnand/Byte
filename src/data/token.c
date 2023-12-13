@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-#include <ctype.h>
-
-#include "../../include/data/token.h"
+#include "./../../include/data/token.h"
 
 // create a function that takes a string and returns a token
 // @param value: the value of the token

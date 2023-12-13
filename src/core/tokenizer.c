@@ -1,6 +1,5 @@
+#include "./../../include/data/token.h"
 #include "./../../include/core/tokenizer.h"
-
-#include "./../data/token.c"
 
 // create a function that takes an array of strings and returns an array of tokens
 // @param arr: the array of strings
@@ -33,7 +32,7 @@ struct TOKEN *tokenize(char **arr, int num_elements) {
 // @param num_elements: the number of elements in the array
 // @return: an array of tokens
 char **split(char *content, int *num_elements) {
-    char *split_by = " \t\n\r";
+    // char *split_by = " \t\n\r";
     char **tokens = malloc((strlen(content) + 1) * sizeof(char *));  // +1 for null terminator
 
     if (tokens == NULL) {

@@ -1,18 +1,5 @@
 #include "./../../include/io/reader.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <libgen.h>
-#include <stdio.h>
-
-// Structure representing a user file
-struct USER_FILE {
-    char *path;
-    char *name;
-    char *ext;
-    char *content;
-};
-
 // returns a USER_FILE struct
 // @param filepath: the path to the file
 // @return: a USER_FILE struct
@@ -41,7 +28,7 @@ const char *get_extension(const char *filename) {
     if (extension != NULL) {
         extension++; // Move past the '.'
     } else {
-        extension = "No extension";
+        extension = "";
     }
 
     return extension;
