@@ -5,31 +5,30 @@ Byte is a small interpreted programming lanuage written in C. It is similar to C
 ## File Structure (Expected)
 
 ```
-- root
-    |-- bins                             # Directory for executables
-    |-- include                          # Header files
-    |-- libs                             # Libraries
-        |-- unity                          # Unit testing library
-    |-- examples                         # Example programs
+|-- bins                             # Directory for executables
+|-- include                          # Header files
+|-- libs                             # Libraries
+    |-- unity                          # Unit testing library
+|-- examples                         # Example programs
 
-    |-- tests                            # Unit tests
+|-- tests                            # Unit tests
 
-    |-- src                              # Source code
-        |-- core                           # Core files
-            |-- lexer.c                     # Lexical analyzer
-            |-- parser.c                    # Parser
-            |-- interpreter.c               # Interpreter
-        |-- data                           # Data structures
-            |-- token.c                     # Token data structure for lexer
-        |-- io                             # Input/Output
-            |-- reader.c                    # File reader
-        |-- utils                          # Utility functions
+|-- src                              # Source code
+    |-- core                           # Core files
+        |-- lexer.c                     # Lexical analyzer
+        |-- parser.c                    # Parser
+        |-- interpreter.c               # Interpreter
+    |-- data                           # Data structures
+        |-- token.c                     # Token data structure for lexer
+    |-- io                             # Input/Output
+        |-- reader.c                    # File reader
+    |-- utils                          # Utility functions
 
-    |-- main.c                           # Main file
+|-- main.c                           # Main file
 
-    |-- .gitignore                       # Gitignore file for specifying ignored files/directories
-    |-- README.md                        # Project README file
-    |-- Makefile                         # Makefile for building the project
+|-- .gitignore                       # Gitignore file for specifying ignored files/directories
+|-- README.md                        # Project README file
+|-- Makefile                         # Makefile for building the project
 
 ```
 
