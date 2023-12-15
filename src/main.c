@@ -5,7 +5,7 @@ int main(int argc, char *argv[]) {
     bool is_valid_args = (argc == 2);
 
     if (!is_valid_args) {
-        printf("Invalid arguments.\nFormat: ./main <filename>\n");
+        print_error("Invalid arguments. Format: byte <filename>.bt", __FILE__, __LINE__);
         return 1;
     }
 
@@ -22,11 +22,13 @@ int main(int argc, char *argv[]) {
     int num_tokens;
     struct TOKEN *tokens = tokenize(split_arr, num_elements_split_arr, &num_tokens);
 
-    for (size_t i = 0; i < num_tokens; i++) {
-        struct TOKEN token = tokens[i];
+    // for (size_t i = 0; i < num_tokens; i++) {
+    //     struct TOKEN token = tokens[i];
 
-        printf("%d: %s\n", token.type, token.value);
-    }
+    //     printf("%d: %s\n", token.type, token.value);
+    // }
+
+    // struct AST_NODE *root = parse(tokens, num_tokens);
 
     free(file.path);
     free(file.name);
