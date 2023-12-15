@@ -1,4 +1,4 @@
 #!/bin/bash
 
-gcc tests/io/reader.test.c src/io/reader.c ./libs/unity/unity.c -o bins/tests/io/reader.test
-./bins/tests/io/reader.test
+gcc tests/utils/reader.test.c src/utils/reader.c ./libs/unity/unity.c -o bins/tests/utils/reader.test
+./bins/tests/utils/reader.test

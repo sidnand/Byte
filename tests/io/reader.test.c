@@ -2,7 +2,7 @@
 #define TEST_READER_H
 
 #include "./../../libs/unity/unity.h"
-#include "./../../include/io/reader.h"
+#include "./../../include/utils/reader.h"
 
 void test_get_extension() {
     const char *filename_txt = "test.txt";

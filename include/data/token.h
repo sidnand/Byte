@@ -14,12 +14,15 @@ enum TOKEN_TYPE {
 
     // Data types
     INT, FLOAT,
-    
+
     // Special characters
-    SEMICOLON, DOT, COMMA, LPAREN, RPAREN, LBRACE, RBRACE, LBRACKET, RBRACKET,
+    SEMICOLON, LPAREN, RPAREN,
 
     // User-defined identifiers
     IDENTIFIER,
+
+    // Keywords
+    PRINT,
 
     // MISC
     WHITESPACE,
@@ -36,5 +39,6 @@ enum TOKEN_TYPE get_token_type(char *token);
 bool is_int(char *str);
 bool is_float(char *str);
 bool is_period(char str);
+bool is_alpha(char str);
 
 #endif

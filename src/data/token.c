@@ -37,23 +37,9 @@ enum TOKEN_TYPE get_token_type(char *token) {
         case ')':
             return RPAREN;
 
-        case '{':
-            return LBRACE;
-        case '}':
-            return RBRACE;
-
-        case '[':
-            return LBRACKET;
-        case ']':
-            return RBRACKET;
-
         // special characters
         case ';':
             return SEMICOLON;
-        case ',':
-            return COMMA;
-        case '.':
-            return DOT;
 
         // whitespace
         case ' ':
@@ -63,6 +49,8 @@ enum TOKEN_TYPE get_token_type(char *token) {
             return WHITESPACE;
 
         default:
+            // enum TOKEN_TYPE keyword = get_keyword_type(token);
+
             if (is_int(token)) {
                 return INT;
             } else if (is_float(token)) {
@@ -129,4 +117,33 @@ bool is_period(char str) {
     }
 
     return true;
+}
+
+// checks if a string is a letter
+// @param str: the string to check
+// @return: true if the string is a letter, false otherwise
+bool is_alpha(char str) {
+    if (str >= 'a' && str <= 'z') {
+        return true;
+    }
+
+    if (str >= 'A' && str <= 'Z') {
+        return true;
+    }
+
+    return false;
+}
+
+// checks if a string is a keyword
+// @param str: the string to check
+// @return: true if the string is a keyword, false otherwise
+enum TOKEN_TYPE get_keyword_type(char *str) {
+    // switch (str) {
+    //     case "print":
+    //         return PRINT;
+    //     default:
+    //         return IDENTIFIER;
+    // }
+
+    return IDENTIFIER;
 }

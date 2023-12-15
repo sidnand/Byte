@@ -20,7 +20,9 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
+    
     buffer[0] = '\0';
+    
     while (char_i < num_elements) {
         char *token = arr[char_i];
 
@@ -30,6 +32,7 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
 
         bool buffer_empty = strlen(buffer) == 0;
         bool is_numeric = isdigit(token[0]) || is_period(token[0]);
+        bool is_alpha = isalpha(token[0]);
 
         if (is_numeric) {
             strcat(buffer, token);
@@ -40,12 +43,26 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
             }
         }
         
+        if (is_alpha) {
+            strcat(buffer, token);
+            char_i++;
+            
+            if (arr[char_i] != NULL) {
+                continue;
+            }
+        }
+
         if (!buffer_empty) {
             enum TOKEN_TYPE type = get_token_type(buffer);
             tokens[token_i] = create_token(buffer, type);
+            printf("End Buffer: %s\n\n", buffer);
 
             buffer[0] = '\0';
             token_i++;
+
+            if (is_numeric || is_alpha) {
+                continue;
+            }
         }
 
         enum TOKEN_TYPE type = get_token_type(token);
