@@ -4,7 +4,7 @@
 // create a function that takes an array of strings and returns an array of tokens
 // @param arr: the array of strings
 // @return: an array of tokens
-struct TOKEN *tokenize(char **arr, int num_elements) {
+struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
     struct TOKEN *tokens = malloc((size_t) num_elements * sizeof(struct TOKEN));
 
     if (tokens == NULL) {
@@ -12,18 +12,52 @@ struct TOKEN *tokenize(char **arr, int num_elements) {
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 0; i < num_elements; i++) {
-        char *token = arr[i];
+    int char_i = 0;
+    int token_i = 0;
+    char *buffer = malloc(num_elements * sizeof(char));
+
+    if (buffer == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    buffer[0] = '\0';
+    while (char_i < num_elements) {
+        char *token = arr[char_i];
 
         if (token == NULL) {
             break;
         }
 
-        enum TOKEN_TYPE type = get_token_type(token);
+        bool buffer_empty = strlen(buffer) == 0;
+        bool is_numeric = isdigit(token[0]) || is_period(token[0]);
 
-        tokens[i] = create_token(&token[0], type);
+        // printf("BEFORE: Token: %s: numeric: %d, buffer_empty: %d, buffer: %s\n", token, is_numeric, buffer_empty, buffer);
+        
+        if (is_numeric) {
+            strcat(buffer, token);
+            char_i++;
+            
+            if (arr[char_i] != NULL) {
+                continue;
+            }
+        }
+        
+        if (!buffer_empty) {
+            strcpy(token, buffer);
+            buffer[0] = '\0';
+        }
+
+        // printf("AFTER: Token: %s: numeric: %d, buffer_empty: %d, buffer: %s\n\n\n", token, is_numeric, buffer_empty, buffer);
+
+        enum TOKEN_TYPE type = get_token_type(token);
+        tokens[token_i] = create_token(&token[0], type);
+
+        char_i++;
+        token_i++;
     }
 
+    free(buffer);
+    *num_tokens = token_i;
     return tokens;
 }
 
