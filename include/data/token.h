@@ -33,6 +33,8 @@ struct TOKEN {
 
 struct TOKEN create_token(const char *value, enum TOKEN_TYPE type);
 enum TOKEN_TYPE get_token_type(char *token);
-bool is_number(char *str);
+bool is_int(char *str);
+bool is_float(char *str);
+bool is_period(char str);
 
 #endif
