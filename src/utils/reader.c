@@ -1,3 +1,4 @@
+#include "./../../include/utils/memory.h"
 #include "./../../include/utils/reader.h"
 
 // returns a USER_FILE struct
@@ -49,13 +50,9 @@ const char *read_file(char *filepath) {
     size_t file_size = ftell(file);
     rewind(file);
 
-    char *content = malloc(file_size + 1);
+    size_t content_size = file_size + 1;
 
-    if (content == NULL) {
-        fclose(file);
-        fprintf(stderr, "Error allocating memory\n");
-        exit(EXIT_FAILURE);
-    }
+    char *content = allocate(content_size, __FILE__, __LINE__);
 
     size_t bytes_read = fread(content, 1, file_size, file);
     content[bytes_read] = '\0'; // null terminate
