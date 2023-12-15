@@ -31,8 +31,6 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
         bool buffer_empty = strlen(buffer) == 0;
         bool is_numeric = isdigit(token[0]) || is_period(token[0]);
 
-        // printf("BEFORE: Token: %s: numeric: %d, buffer_empty: %d, buffer: %s\n", token, is_numeric, buffer_empty, buffer);
-        
         if (is_numeric) {
             strcat(buffer, token);
             char_i++;
@@ -43,11 +41,12 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
         }
         
         if (!buffer_empty) {
-            strcpy(token, buffer);
-            buffer[0] = '\0';
-        }
+            enum TOKEN_TYPE type = get_token_type(buffer);
+            tokens[token_i] = create_token(buffer, type);
 
-        // printf("AFTER: Token: %s: numeric: %d, buffer_empty: %d, buffer: %s\n\n\n", token, is_numeric, buffer_empty, buffer);
+            buffer[0] = '\0';
+            token_i++;
+        }
 
         enum TOKEN_TYPE type = get_token_type(token);
         tokens[token_i] = create_token(&token[0], type);
