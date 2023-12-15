@@ -1,3 +1,5 @@
+#include "./../../include/utils/error.h"
+#include "./../../include/utils/memory.h"
 #include "./../../include/data/token.h"
 #include "./../../include/core/tokenizer.h"
 
@@ -5,71 +7,47 @@
 // @param arr: the array of strings
 // @return: an array of tokens
 struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
-    struct TOKEN *tokens = malloc((size_t) num_elements * sizeof(struct TOKEN));
-
-    if (tokens == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
+    size_t token_size = num_elements * sizeof(struct TOKEN);
+    struct TOKEN *tokens = allocate(token_size, __FILE__, __LINE__);
 
     int char_i = 0;
     int token_i = 0;
-    char *buffer = malloc(num_elements * sizeof(char));
-
-    if (buffer == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-    
-    buffer[0] = '\0';
+    size_t buffer_size = num_elements * sizeof(char);
+    char *buffer = allocate(buffer_size, __FILE__, __LINE__);
     
     while (char_i < num_elements) {
         char *token = arr[char_i];
-
-        if (token == NULL) {
-            break;
-        }
+        if (token == NULL) { break; }
 
         bool buffer_empty = strlen(buffer) == 0;
         bool is_numeric = isdigit(token[0]) || is_period(token[0]);
         bool is_alpha = isalpha(token[0]);
+        bool is_grouping = is_numeric || is_alpha;
 
-        if (is_numeric) {
+        if (is_grouping) {
             strcat(buffer, token);
             char_i++;
             
             if (arr[char_i] != NULL) {
                 continue;
             }
-        }
+        } 
         
-        if (is_alpha) {
-            strcat(buffer, token);
-            char_i++;
-            
-            if (arr[char_i] != NULL) {
-                continue;
-            }
-        }
-
         if (!buffer_empty) {
             enum TOKEN_TYPE type = get_token_type(buffer);
             tokens[token_i] = create_token(buffer, type);
-            printf("End Buffer: %s\n\n", buffer);
 
-            buffer[0] = '\0';
             token_i++;
-
-            if (is_numeric || is_alpha) {
-                continue;
-            }
+            
+            buffer[0] = '\0';
+            if (is_grouping) { continue; }
         }
 
         enum TOKEN_TYPE type = get_token_type(token);
         tokens[token_i] = create_token(&token[0], type);
 
-        char_i++;
         token_i++;
+        char_i++;
     }
 
     free(buffer);
