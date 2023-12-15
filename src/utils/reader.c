@@ -41,9 +41,7 @@ const char *read_file(char *filepath) {
     FILE *file = fopen(filepath, "r");
 
     if (file == NULL) {
-
-        fprintf(stderr, "Error opening file\n");
-        exit(EXIT_FAILURE);
+        print_error("Error opening file", __FILE__, __LINE__);
     }
 
     fseek(file, 0, SEEK_END);
@@ -59,8 +57,7 @@ const char *read_file(char *filepath) {
 
     if (bytes_read != file_size) {
         fclose(file);
-        fprintf(stderr, "Error reading file\n");
-        exit(EXIT_FAILURE);
+        print_error("Error reading file", __FILE__, __LINE__);
     }
 
     return content;
