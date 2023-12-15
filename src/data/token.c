@@ -49,14 +49,12 @@ enum TOKEN_TYPE get_token_type(char *token) {
             return WHITESPACE;
 
         default:
-            // enum TOKEN_TYPE keyword = get_keyword_type(token);
-
             if (is_int(token)) {
                 return INT;
             } else if (is_float(token)) {
                 return FLOAT;
             } else {
-                return IDENTIFIER;
+                return get_keyword_type(token);
             }
     }
 }
@@ -138,12 +136,9 @@ bool is_alpha(char str) {
 // @param str: the string to check
 // @return: true if the string is a keyword, false otherwise
 enum TOKEN_TYPE get_keyword_type(char *str) {
-    // switch (str) {
-    //     case "print":
-    //         return PRINT;
-    //     default:
-    //         return IDENTIFIER;
-    // }
+    if (strcmp(str, "print") == 0) {
+        return PRINT;
+    }
 
     return IDENTIFIER;
 }

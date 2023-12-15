@@ -40,5 +40,6 @@ bool is_int(char *str);
 bool is_float(char *str);
 bool is_period(char str);
 bool is_alpha(char str);
+enum TOKEN_TYPE get_keyword_type(char *str);
 
 #endif
