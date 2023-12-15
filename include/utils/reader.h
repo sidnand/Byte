@@ -6,6 +6,9 @@
 #include <libgen.h>
 #include <stdio.h>
 
+#include "./../../include/utils/error.h"
+#include "./../../include/utils/memory.h"
+
 // Structure representing a user file
 struct USER_FILE {
     char *path;

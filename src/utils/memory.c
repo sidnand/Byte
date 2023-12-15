@@ -1,4 +1,3 @@
-#include "./../../include/utils/error.h"
 #include "./../../include/utils/memory.h"
 
 void* allocate(size_t size, const char *file, int line) {

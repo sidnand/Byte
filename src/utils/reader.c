@@ -1,4 +1,3 @@
-#include "./../../include/utils/memory.h"
 #include "./../../include/utils/reader.h"
 
 // returns a USER_FILE struct
@@ -42,6 +41,7 @@ const char *read_file(char *filepath) {
     FILE *file = fopen(filepath, "r");
 
     if (file == NULL) {
+
         fprintf(stderr, "Error opening file\n");
         exit(EXIT_FAILURE);
     }

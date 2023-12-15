@@ -1,6 +1,3 @@
-#include "./../../include/utils/error.h"
-#include "./../../include/utils/memory.h"
-#include "./../../include/data/token.h"
 #include "./../../include/core/tokenizer.h"
 
 // create a function that takes an array of strings and returns an array of tokens

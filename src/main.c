@@ -1,7 +1,3 @@
-#include "./../include/utils/reader.h"
-#include "./../include/data/token.h"
-#include "./../include/core/tokenizer.h"
-
 #include "./../include/main.h"
 
 int main(int argc, char *argv[]) {
