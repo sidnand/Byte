@@ -6,9 +6,9 @@
 
 int main(int argc, char *argv[]) {
 
-    bool isValidArguments = (argc == 2);
+    bool is_valid_args = (argc == 2);
 
-    if (!isValidArguments) {
+    if (!is_valid_args) {
         printf("Invalid arguments.\nFormat: ./main <filename>\n");
         return 1;
     }
