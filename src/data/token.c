@@ -63,8 +63,10 @@ enum TOKEN_TYPE get_token_type(char *token) {
             return WHITESPACE;
 
         default:
-            if (is_number(token)) {
+            if (is_int(token)) {
                 return INT;
+            } else if (is_float(token)) {
+                return FLOAT;
             } else {
                 return IDENTIFIER;
             }
@@ -74,8 +76,55 @@ enum TOKEN_TYPE get_token_type(char *token) {
 // checks if a string is a number
 // @param str: the string to check
 // @return: true if the string is a number, false otherwise
-bool is_number(char *str) {
-    if (!isdigit(*str)) {
+bool is_int(char *str) {
+    if (str == NULL) {
+        return false;
+    }
+
+    if (strlen(str) == 0) {
+        return false;
+    }
+
+    for (size_t i = 0; i < strlen(str); i++) {
+        if (!isdigit(str[i])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// checks if a string is a float
+// @param str: the string to check
+// @return: true if the string is a float, false otherwise
+bool is_float(char *str) {
+    if (str == NULL) {
+        return false;
+    }
+
+    if (strlen(str) == 0) {
+        return false;
+    }
+
+    int num_periods = 0;
+    for (size_t i = 0; i < strlen(str); i++) {
+        if (!isdigit(str[i])) {
+            if (is_period(str[i]) && num_periods == 0) {
+                num_periods++;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+// checks if a string is a period
+// @param str: the string to check
+// @return: true if the string is a period, false otherwise
+bool is_period(char str) {
+    if (str != '.') {
         return false;
     }
 
