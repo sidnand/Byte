@@ -140,5 +140,13 @@ enum TOKEN_TYPE get_keyword_type(char *str) {
         return PRINT;
     }
 
+    if (strcmp(str, "int") == 0) {
+        return INT;
+    }
+
+    if (strcmp(str, "float") == 0) {
+        return FLOAT;
+    }
+
     return IDENTIFIER;
 }
