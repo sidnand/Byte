@@ -60,26 +60,16 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
 // @param num_elements: the number of elements in the array
 // @return: an array of tokens
 char **split(char *content, int *num_elements) {
-    // char *split_by = " \t\n\r";
-    char **tokens = malloc((strlen(content) + 1) * sizeof(char *));  // +1 for null terminator
-
-    if (tokens == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
+    size_t tokens_size = (strlen(content) + 1) * sizeof(char *); // +1 for null terminator
+    char **tokens =  allocate(tokens_size, __FILE__, __LINE__);
 
     int i = 0;
-    while (content[i] != '\0') {
-        tokens[i] = malloc(2 * sizeof(char)); // 2 bytes, one for the character and one for the null terminator
-
-        if (tokens[i] == NULL) {
-            fprintf(stderr, "Memory allocation failed\n");
-            exit(EXIT_FAILURE);
-        }
+    for (; content[i] != '\0'; i++) {
+        size_t token_size = 2 * sizeof(char); // 2 bytes, one for the character and one for the null terminator
+        tokens[i] = allocate(token_size, __FILE__, __LINE__);
 
         tokens[i][0] = content[i];
         tokens[i][1] = '\0';
-        i++;
     }
 
     *num_elements = i;
