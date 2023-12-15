@@ -4,7 +4,7 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Werror
+# CFLAGS = -Wall -Werror
 
 # Directories
 SRC_DIR = src

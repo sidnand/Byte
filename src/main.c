@@ -23,16 +23,14 @@ int main(int argc, char *argv[]) {
     //     printf("%s\n", split_arr[i]);
     // }
 
-    struct TOKEN *tokens = tokenize(split_arr, num_elements_split_arr);
+    int num_tokens;
+    struct TOKEN *tokens = tokenize(split_arr, num_elements_split_arr, &num_tokens);
 
-    for (size_t i = 0; i < num_elements_split_arr; i++) {
+    for (size_t i = 0; i < num_tokens; i++) {
         struct TOKEN token = tokens[i];
 
-        printf("Type: %d\n", token.type);
-        printf("Token: %s\n", token.value);
+        printf("%d: %s\n", token.type, token.value);
     }
-
-    // FREE MEMORY
 
     free(file.path);
     free(file.name);
