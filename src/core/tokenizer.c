@@ -12,6 +12,8 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
     size_t buffer_size = num_elements * sizeof(char);
     char *buffer = allocate(buffer_size, __FILE__, __LINE__);
     
+    int num_quotes = 0;
+
     while (char_i < num_elements) {
         char *token = arr[char_i];
         if (token == NULL) { break; }
@@ -19,10 +21,16 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
         bool buffer_empty = strlen(buffer) == 0;
         bool is_numeric = isdigit(token[0]) || is_period(token[0]);
         bool is_alpha = isalpha(token[0]);
-        bool is_grouping = is_numeric || is_alpha;
+        bool is_string = is_quote(token[0]) || (num_quotes > 0 && num_quotes < 2);
+        bool is_not_string = is_quote(token[0]) || (num_quotes >= 2);
+
+        if (is_quote(token[0])) { num_quotes++; }
+
+        bool is_grouping = is_numeric || is_alpha || is_string;
 
         if (is_grouping) {
             strcat(buffer, token);
+
             char_i++;
             
             if (arr[char_i] != NULL) {
@@ -32,15 +40,29 @@ struct TOKEN *tokenize(char **arr, int num_elements, int *num_tokens) {
         
         if (!buffer_empty) {
             enum TOKEN_TYPE type = get_token_type(buffer);
+
+            if (type == WHITESPACE) {
+               char_i++;
+                continue;
+            }
+
             tokens[token_i] = create_token(buffer, type);
 
             token_i++;
             
             buffer[0] = '\0';
+
+            if (is_not_string) { num_quotes = 0; }
             if (is_grouping) { continue; }
         }
 
         enum TOKEN_TYPE type = get_token_type(token);
+
+        if (type == WHITESPACE) {
+            char_i++;
+            continue;
+        }
+
         tokens[token_i] = create_token(&token[0], type);
 
         token_i++;

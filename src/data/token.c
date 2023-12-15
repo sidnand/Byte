@@ -117,15 +117,11 @@ bool is_period(char str) {
     return true;
 }
 
-// checks if a string is a letter
+// check if a string is a single or double quote
 // @param str: the string to check
-// @return: true if the string is a letter, false otherwise
-bool is_alpha(char str) {
-    if (str >= 'a' && str <= 'z') {
-        return true;
-    }
-
-    if (str >= 'A' && str <= 'Z') {
+// @return: true if the string is a quote, false otherwise
+bool is_quote(char str) {
+    if (str == '\'' || str == '"') {
         return true;
     }
 
